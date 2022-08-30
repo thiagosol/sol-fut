@@ -12,4 +12,6 @@
                  [com.datomic/datomic-free "0.9.5697"]
                  [prismatic/schema "1.4.0"]
                  [clj-http "3.12.3"]]
+
+  :main sol-fut.core
   :repl-options {:init-ns sol-fut.core})

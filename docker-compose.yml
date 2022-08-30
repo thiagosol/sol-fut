@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  database-sol-fut:
+    container_name: database-sol-fut
+    image: akiel/datomic-free
+    volumes:
+      - ./data_db:/data
+    ports:
+      - "4334-4336:4334-4336"
+    environment:
+      ADMIN_PASSWORD: admin
+      DATOMIC_PASSWORD: datomic
+      ALT_HOST: database-sol-fut
+
+  api-sol-fut:
+    container_name: api-sol-fut
+    depends_on:
+      - database-sol-fut
+    build: .
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - "8890:8890"
+    command: "lein run"
+    environment:
+      SOL_FUT_URI_DB: datomic:free://database-sol-fut:4334/sol-fut?user=admin&password=datomic
+
+networks:
+  default:
+    external:
+      name: external-sol-apis
