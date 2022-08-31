@@ -1,9 +1,9 @@
 (ns sol-fut.db.config
   (:require [datomic.api :as d]
-            [sol-fut.db.schemas :as db.schemas]))
+            [sol-fut.db.schemas :as db.schemas]
+            [sol-fut.config :as config]))
 
-(def db-uri (or (get-in (System/getenv) ["SOL_FUT_URI_DB"])
-                "datomic:free://localhost:4334/sol-fut?user=admin&password=datomic"))
+(def db-uri (config/config-by :db-uri))
 
 (defn conn []
   (d/connect db-uri))

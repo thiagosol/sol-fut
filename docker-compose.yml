@@ -25,6 +25,9 @@ services:
     command: "lein run"
     environment:
       SOL_FUT_URI_DB: datomic:free://database-sol-fut:4334/sol-fut?user=admin&password=datomic
+      SOL_FUT_WHATSAPP_URI_SEND_CODE: http://localhost:5000/send
+      SOL_FUT_WHATSAPP_CLIENT_ID_SEND_CODE: clientid
+      SOL_FUT_WHATSAPP_ACCESS_KEY_SEND_CODE: accesskey
 
 networks:
   default:
