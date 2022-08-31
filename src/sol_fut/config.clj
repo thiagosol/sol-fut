@@ -18,7 +18,7 @@
                "accesskey")
 
    :time-expires-whatsapp-code-in-minutes
-   (or (get-in (System/getenv) ["SOL_FUT_WHATSAPP_EXPIRES_CODE_IN_MINUTES"])
+   (or (read-string (get-in (System/getenv) ["SOL_FUT_WHATSAPP_EXPIRES_CODE_IN_MINUTES"]))
        10)})
 
 (defn config-by [key]
