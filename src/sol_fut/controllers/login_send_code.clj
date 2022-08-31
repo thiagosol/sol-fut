@@ -5,11 +5,12 @@
             [sol-fut.diplomat.http-client :as http-client]))
 
 (defn create-and-send-code! [phone]
-  (let [code    (logic.generate-code/generate-code)
-        login   (models.login/new-login phone code)
-        message (str "O seu código de ativação é: " code)]
-    (db.login/upsert! login)
-    (http-client/send-code phone message)))
+  (let [code               (logic.generate-code/generate-code)
+        login              (models.login/new-login phone code)
+        message            (str "O seu código de ativação é: " code)
+        response-send-code (http-client/send-code phone message)]
+    (when (= (:message response-send-code) "Sucesso")
+      (db.login/upsert! login))))
 
 (defn execute! [{:keys [data]}]
   (if (nil? (db.login/login-by-phone (:phone data)))
