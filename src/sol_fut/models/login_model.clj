@@ -1,18 +1,19 @@
 (ns sol-fut.models.login-model
   (:require [schema.core :as s])
-  (:import (java.util UUID)))
-
-(defn uuid [] (UUID/randomUUID))
+  (:import (java.util UUID)
+           (java.util Date)))
 
 (def Login
-  {:login/id                              UUID
-   (s/optional-key :login/phone)          s/Str
-   (s/optional-key :login/code)           s/Str})
+  {:login/id                               UUID
+   (s/optional-key :login/phone)           s/Str
+   (s/optional-key :login/code)            s/Str
+   (s/optional-key :login/code-expires-at) Date
+   (s/optional-key :login/code-is-valid)   s/Bool})
 
 (s/defn new-login :- Login
-        ([phone code]
-         (new-login (uuid) phone code))
-        ([uuid phone code]
-         {:login/id      uuid
-          :login/phone    phone
-          :login/code    code}))
+  [uuid phone code code-expires-at]
+  {:login/id              uuid
+   :login/phone           phone
+   :login/code            code
+   :login/code-expires-at code-expires-at
+   :login/code-is-valid   true})

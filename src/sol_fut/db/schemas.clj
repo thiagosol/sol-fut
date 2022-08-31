@@ -15,6 +15,14 @@
 
              {:db/ident       :login/code
               :db/valueType   :db.type/string
+              :db/cardinality :db.cardinality/one}
+
+             {:db/ident       :login/code-expires-at
+              :db/valueType   :db.type/instant
+              :db/cardinality :db.cardinality/one}
+
+             {:db/ident       :login/code-is-valid
+              :db/valueType   :db.type/boolean
               :db/cardinality :db.cardinality/one}])
 
 (defn dissoc-db-id [entity]

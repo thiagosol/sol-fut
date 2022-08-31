@@ -11,7 +11,8 @@
                  [org.slf4j/slf4j-simple "2.0.0"]
                  [com.datomic/datomic-free "0.9.5697"]
                  [prismatic/schema "1.4.0"]
-                 [clj-http "3.12.3"]]
+                 [clj-http "3.12.3"]
+                 [clj-time "0.15.2"]]
 
   :main sol-fut.core
   :repl-options {:init-ns sol-fut.core})
